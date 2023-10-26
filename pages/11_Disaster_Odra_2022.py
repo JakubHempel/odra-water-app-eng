@@ -6,6 +6,7 @@ from show_map import disaster_map
 from visualizationparams import get_vis_params
 from stats import get_disaster_stats
 
+st.cache_data.clear()
 
 @st.cache_data
 def get_vis_params_cache():
