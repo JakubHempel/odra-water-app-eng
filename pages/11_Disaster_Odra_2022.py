@@ -6,7 +6,6 @@ from show_map import disaster_map
 from visualizationparams import get_vis_params
 from stats import get_disaster_stats
 
-
 @st.cache_data
 def get_vis_params_cache():
     return get_vis_params()
@@ -91,8 +90,8 @@ if st.session_state.city and st.session_state.index_name is not None:
     layers = list(disaster_layers.keys())
     colormap = get_vis_params_cache()[st.session_state.index_name]
 
-if not "layer" in st.session_state:
-    st.session_state["layer"] = None
+if not "disaster_layer" in st.session_state:
+    st.session_state["disaster_layer"] = None
 
 with col1:
     st.divider()
@@ -105,11 +104,11 @@ with col1:
 
 try:
     if disaster_date == "Before disaster":
-        st.session_state["layer"] = layers[0]
+        st.session_state["disaster_layer"] = layers[0]
     elif disaster_date == "During disaster":
-        st.session_state["layer"] = layers[1]
+        st.session_state["disaster_layer"] = layers[1]
     elif disaster_date == "After disaster":
-        st.session_state["layer"] = layers[2]
+        st.session_state["disaster_layer"] = layers[2]
 except:
     with col3:
         st.header("\n")
@@ -162,10 +161,10 @@ with col3:
     if (
         st.session_state.city
         and st.session_state.index_name
-        and st.session_state.layer is not None
+        and st.session_state.disaster_layer is not None
     ):
         disaster_map(
-            disaster_layers[st.session_state.layer],
+            disaster_layers[st.session_state.disaster_layer],
             st.session_state.index_name,
             st.session_state.city,
             colormap,
