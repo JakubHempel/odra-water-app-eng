@@ -53,8 +53,8 @@ city_colors = {
 if not "city" in st.session_state:
     st.session_state["city"] = None
 
-if not "index" in st.session_state:
-    st.session_state["index"] = None
+if not "index_name" in st.session_state:
+    st.session_state["index_name"] = None
 
 if not "zoom" in st.session_state:
     st.session_state["zoom"] = None
@@ -68,7 +68,7 @@ with col1:
 
     st.divider()
 
-    st.session_state["index"] = st.selectbox(
+    st.session_state["index_name"] = st.selectbox(
         "Choose index",
         (
             "NDWI",
@@ -84,12 +84,12 @@ with col1:
         index=None,
     )
 
-if st.session_state.city and st.session_state.index is not None:
+if st.session_state.city and st.session_state.index_name is not None:
     disaster_layers = get_disaster_layers_cache()[st.session_state.city][
-        st.session_state.index
+        st.session_state.index_name
     ]
     layers = list(disaster_layers.keys())
-    colormap = get_vis_params_cache()[st.session_state.index]
+    colormap = get_vis_params_cache()[st.session_state.index_name]
 
 if not "layer" in st.session_state:
     st.session_state["layer"] = None
@@ -120,7 +120,7 @@ if st.session_state.city is not None:
 
 disaster_stats = get_disaster_stats_cache()
 
-if st.session_state.index and disaster_date is not None:
+if st.session_state.index_name and disaster_date is not None:
     with col1:
         st.divider()
         hover_template = "Value: %{y:.2f}<extra></extra>"
@@ -132,9 +132,9 @@ if st.session_state.index and disaster_date is not None:
                 "City": [city] * 3,
                 "Time": ["Before disaster", "During disaster", "After disaster"],
                 "Value": [
-                    disaster_stats["before"].at[city, st.session_state.index],
-                    disaster_stats["during"].at[city, st.session_state.index],
-                    disaster_stats["after"].at[city, st.session_state.index],
+                    disaster_stats["before"].at[city, st.session_state.index_name],
+                    disaster_stats["during"].at[city, st.session_state.index_name],
+                    disaster_stats["after"].at[city, st.session_state.index_name],
                 ],
             }
             city_df = pd.DataFrame(data)
@@ -150,7 +150,7 @@ if st.session_state.index and disaster_date is not None:
             )
 
         fig.update_layout(
-            title=f"{st.session_state.index} - median values from POIs",
+            title=f"{st.session_state.index_name} - median values from POIs",
             yaxis_title="Value",
             height=550,
             width=610,
@@ -161,12 +161,12 @@ if st.session_state.index and disaster_date is not None:
 with col3:
     if (
         st.session_state.city
-        and st.session_state.index
+        and st.session_state.index_name
         and st.session_state.layer is not None
     ):
         disaster_map(
             disaster_layers[st.session_state.layer],
-            st.session_state.index,
+            st.session_state.index_name,
             st.session_state.city,
             colormap,
             st.session_state.zoom,
