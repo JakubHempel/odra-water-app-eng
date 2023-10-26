@@ -3,3 +3,4 @@ geemap
 pandas
 streamlit
 plotly
+folium
