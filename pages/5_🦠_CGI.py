@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 from show_map import show_map
 from visualizationparams import get_vis_params
@@ -21,8 +22,6 @@ def get_layers_cache():
 def get_vis_params_cache():
     return get_vis_params()
 
-
-st.set_page_config(layout="wide")
 
 index_name: Final = "CGI"
 

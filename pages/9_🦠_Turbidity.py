@@ -1,11 +1,11 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 from show_map import show_map
 from visualizationparams import get_vis_params
 from sentinel_imagery import get_all_layers
 from stats import get_images_stats
 from typing import Final
-
 
 @st.cache_data
 def get_stats_cache():
@@ -21,8 +21,6 @@ def get_layers_cache():
 def get_vis_params_cache():
     return get_vis_params()
 
-
-st.set_page_config(layout="wide")
 
 index_name: Final = "Turbidity"
 
