@@ -4,6 +4,7 @@ import geemap.foliumap as geemap
 import gee_data as gd
 from visualizationparams import get_vis_params
 import time
+from folium import plugins
 
 
 @st.cache_data
@@ -16,18 +17,22 @@ def show_map(cache_image, index_name, vis_param):
     layer_name = image.get("system:index").getInfo()
 
     Map = geemap.Map(layer_ctrl=True, basemap="Esri.WorldGrayCanvas")
+    minimap = plugins.MiniMap()
+    Map.add_child(minimap)  
     Map.addLayer(image.select(index_name), vis_param, f"{index_name} - {layer_name}")
     Map.add_colorbar(vis_param, label=f"{index_name} Index")
 
     with st.spinner("Wait for the map..."):
-        time.sleep(2)
+        time.sleep(1)
 
     Map.setCenter(17.036, 51.111, 11)
-    Map.to_streamlit(height=850)
+    Map.to_streamlit(height=800)
 
 
 def disaster_map(cache_image, index_name, city, vis_param, zoom):
     Map = geemap.Map(basemap="Esri.WorldGrayCanvas")
+    minimap = plugins.MiniMap()
+    Map.add_child(minimap)  
 
     boundries_style = {
         "color": "#CD5C5C",
