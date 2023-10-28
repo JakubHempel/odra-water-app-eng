@@ -68,7 +68,8 @@ with st.container():
                 )
                 with tab1:
                     st.cache_data.clear()
-                    rows = st.columns((1, 1, 1))
+                    st.subheader(f"{st.session_state.index} annual charts")
+                    rows = st.columns(3)
                     for i, year in enumerate(years):
                         with rows[i % 3]:
                             yearly_data = get_yearly_stats_cache()[
@@ -98,7 +99,8 @@ with st.container():
                             st.plotly_chart(fig)
                 with tab2:
                     st.cache_data.clear()
-                    rows = st.columns(3, gap="small")
+                    st.subheader(f"{st.session_state.index} monthly charts")
+                    rows = st.columns(3)
                     for i, month in enumerate(months):
                         with rows[i % 3]:
                             monthly_data = get_monthly_stats_cache()[
