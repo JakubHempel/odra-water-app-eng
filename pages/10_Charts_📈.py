@@ -1,7 +1,9 @@
 import streamlit as st
+st.set_page_config(layout="wide")
+
+import plotly.graph_objects as go
 from stats import get_images_stats, get_adv_stats
 from typing import Final
-import plotly.graph_objects as go
 
 
 @st.cache_data
@@ -29,7 +31,6 @@ def get_disaster_stats_cache():
     return get_adv_stats()["disaster_stats"]
 
 
-st.set_page_config(layout="wide")
 st.header(
     "Explore to learn more about water quality index values ​​presented in graphs"
 )
@@ -53,7 +54,7 @@ if not "index" in st.session_state:
     st.session_state["index"] = "NDWI"
 
 # Create a layout with 9 columns
-columns = st.columns(9, gap="small")
+columns = st.columns(9)
 
 hover_template = "Value: %{y:.2f}<extra></extra>"
 
@@ -63,7 +64,7 @@ with st.container():
             st.session_state["index"] = index_name
             with st.container():
                 tab1, tab2, tab3, tab4 = st.tabs(
-                    ["Yearly plots", "Monthy plots", "Period plot", "Disaster plot"]
+                    ["Annual plots", "Monthly plots", "Period plot", "Disaster plot"]
                 )
                 with tab1:
                     st.cache_data.clear()
