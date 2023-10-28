@@ -7,6 +7,7 @@ from sentinel_imagery import get_all_layers
 from stats import get_images_stats
 from typing import Final
 
+
 @st.cache_data
 def get_stats_cache():
     return get_images_stats()
