@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="💦 NDVI | OdrApp 💦")
 
 from show_map import show_map
 from visualizationparams import get_vis_params

@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Charts 📈 | OdrApp 💦")
 
 import plotly.graph_objects as go
 from stats import get_images_stats, get_adv_stats
