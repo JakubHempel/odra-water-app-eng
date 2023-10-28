@@ -1,10 +1,13 @@
 import streamlit as st
+st.set_page_config(layout="wide")
+
 import plotly.graph_objects as go
 import pandas as pd
 from sentinel_imagery import get_all_disaster_layers
 from show_map import disaster_map
 from visualizationparams import get_vis_params
 from stats import get_disaster_stats
+
 
 @st.cache_data
 def get_vis_params_cache():
@@ -19,9 +22,6 @@ def get_disaster_layers_cache():
 @st.cache_data
 def get_disaster_stats_cache():
     return get_disaster_stats()
-
-
-st.set_page_config(layout="wide")
 
 
 cities = ["Ostrava", "Wroclaw", "Frankfurt", "Szczecin"]
