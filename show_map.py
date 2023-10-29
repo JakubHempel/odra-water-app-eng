@@ -62,7 +62,7 @@ def disaster_map(cache_image, index_name, city, vis_param, zoom):
 
     Map.addLayer(image, vis_param, f"{index_name} - {city} - {date_acquired}")
     Map.addLayer(gd.city_boundaries[city].style(**boundries_style), {}, city)
-    Map.addLayer(gd.pois[city].style(**points_style), {}, f"POIs - {city}")
+    Map.addLayer(gd.pois[city].style(**points_style), {}, f"POIs - {city}", False)
 
     Map.add_colorbar(vis_param, label=f"{index_name} Index")
 
