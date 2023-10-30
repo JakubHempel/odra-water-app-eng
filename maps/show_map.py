@@ -2,7 +2,7 @@ import ee
 import streamlit as st
 import geemap.foliumap as geemap
 import gee_data as gd
-from visualizationparams import get_vis_params
+from maps.visualizationparams import get_vis_params
 import time
 from folium import plugins
 
