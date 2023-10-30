@@ -7,8 +7,10 @@
 1. Przejdź do strony *Indexes* 🌍 i dowiedz się więcej o indekach spektralnych użytych w analizie.
 2. Odwiedzaj strony indeksów:
     - 💦 - powszechnie stosowane wskaźniki,
-    - 🦠 - związane stricte z zanieczyszczeniem i jakością wody.\n
+    - 🦠 - związane stricte z zanieczyszczeniem i jakością wody.
+
     Przeglądaj mapy z wizualizacją indeksów w zakładce 🗺️ Map i wykres liniowy przedstawiający średnią wartość indeksów na przestrzeni analizowanego okresu w zakładce 📈 Chart.
+
 3. Wejdź na stronę *Charts* 📈 gdzie poznasz wizualizację wyników na wykresach, tj.
     - "roczne",
     - "miesięczne",
