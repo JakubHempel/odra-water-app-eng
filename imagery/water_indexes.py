@@ -28,7 +28,7 @@ def water_indexes(image):
     
     if SABI:
         sabi_min = ee.Image.constant(0.07)
-        sabi_max = ee.Image.constant(4.77)
+        sabi_max = ee.Image.constant(4.09)
 
         sabi = image.expression('(NIR - RED) / (BLUE + GREEN)', 
                                 {'NIR': image.select('B8'),
@@ -43,8 +43,8 @@ def water_indexes(image):
     range_min = 0
 
     if CGI:
-        cgi_min = ee.Image.constant(0.45)
-        cgi_max = ee.Image.constant(7.6)
+        cgi_min = ee.Image.constant(0.48)
+        cgi_max = ee.Image.constant(7.36)
 
         cgi = image.expression('((SWIR/GREEN) - 1)', {'SWIR': image.select('B9'),'GREEN': image.select('B3')})
         
@@ -55,7 +55,7 @@ def water_indexes(image):
     range_max = 5
 
     if CDOM:
-        cdom_min = ee.Image.constant(4.63)
+        cdom_min = ee.Image.constant(3.07)
         cdom_max = ee.Image.constant(60.69)
 
         cdom = image.expression('537 * exp(-2.93 * GREEN / RED)',
@@ -69,7 +69,7 @@ def water_indexes(image):
     range_max = 40
 
     if DOC:
-        doc_min = ee.Image.constant(11.41)
+        doc_min = ee.Image.constant(8.32)
         doc_max = ee.Image.constant(81.58)
     
         doc = image.expression('432 * exp(-2.24 * GREEN / RED)',
@@ -83,7 +83,7 @@ def water_indexes(image):
     range_max = 100
 
     if Cya:
-        cya_min = ee.Image.constant(20.67)
+        cya_min = ee.Image.constant(53.19)
         cya_max = ee.Image.constant(27914.79)
 
         cya = image.expression('115530.31 * (GREEN * RED / BLUE) ** 2.38',
@@ -98,7 +98,7 @@ def water_indexes(image):
     range_max = 20
 
     if Turb:
-        turb_min = ee.Image.constant(-1.92)
+        turb_min = ee.Image.constant(-1.87)
         turb_max = ee.Image.constant(49.46)
 
         turb = image.expression('8.93 * (GREEN / UBLUE) - 6.39',

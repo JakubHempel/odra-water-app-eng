@@ -2,7 +2,8 @@ import ee
 import geemap.foliumap as geemap
 from datetime import datetime
 import gee_data as gd
-from water_indexes import water_indexes
+from imagery.water_indexes import water_indexes
+
 
 
 # Define the function to set DATE_ACQUIRED property to each image
@@ -55,10 +56,7 @@ def get_sentinel_images(start_year, end_year, months):
 
     # Loop through each year and month
     for year in range(start_year, end_year + 1):
-        # Determine the end month for the current year
-        end_month = datetime.now().month - 1 if year == 2023 else 10
-
-        for month in range(4, end_month + 1):
+        for month in months:
             start_date = ee.Date.fromYMD(year, month, 1)
             end_date = start_date.advance(1, "month")
 
@@ -234,6 +232,7 @@ def get_all_layers():
         "2023-07",
         "2023-08",
         "2023-09",
+        "2023-10"
     ]
 
     # Iterate through the index names
