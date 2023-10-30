@@ -1,9 +1,9 @@
 import streamlit as st
 st.set_page_config(layout="wide", page_title="🦠 Turbidity | OdrApp 💦")
 
-from show_map import show_map
-from visualizationparams import get_vis_params
-from sentinel_imagery import get_all_layers
+from maps.show_map import show_map
+from maps.visualizationparams import get_vis_params
+from imagery.sentinel_imagery import get_all_layers
 from stats import get_images_stats
 from typing import Final
 

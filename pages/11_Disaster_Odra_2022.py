@@ -3,9 +3,9 @@ st.set_page_config(layout="wide", page_title="Disaster Odra 2022 | OdrApp 💦")
 
 import plotly.graph_objects as go
 import pandas as pd
-from sentinel_imagery import get_all_disaster_layers
-from show_map import disaster_map
-from visualizationparams import get_vis_params
+from imagery.sentinel_imagery import get_all_disaster_layers
+from maps.show_map import disaster_map
+from maps.visualizationparams import get_vis_params
 from stats import get_disaster_stats
 
 
