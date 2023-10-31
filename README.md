@@ -1,7 +1,7 @@
 # odra-water-app
 ## Welcome in OdrApp! 💦
 
-***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporalwater quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October. Explore all the aspects thoroughly and learn more about water pollution in the Oder River.
+***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporal water quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October. Explore all the aspects thoroughly and learn more about water pollution in the Oder River.
 
 #### Suggested actions:
 1. Go to the *Indexes* 🌍 page and learn more about the spectral indices used in the analysis.
