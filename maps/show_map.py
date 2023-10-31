@@ -22,7 +22,7 @@ def show_map(cache_image, index_name, vis_param):
     Map.addLayer(image.select(index_name), vis_param, f"{index_name} - {layer_name}")
     Map.add_colorbar(vis_param, label=f"{index_name} Index")
 
-    with st.spinner("Wait for the map..."):
+    with st.spinner("Wait for the map ..."):
         time.sleep(1)
 
     Map.setCenter(17.036, 51.111, 11)
@@ -66,7 +66,7 @@ def disaster_map(cache_image, index_name, city, vis_param, zoom):
 
     Map.add_colorbar(vis_param, label=f"{index_name} Index")
 
-    with st.spinner("Wait for the map..."):
+    with st.spinner("Wait for the map ..."):
         time.sleep(1)
 
     Map.setCenter(*zoom)
