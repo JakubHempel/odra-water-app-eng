@@ -9,7 +9,7 @@ st.title(
 
 st.markdown(
     """
-    ***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporalwater quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October.\n
+    ***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporal water quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October.\n
     Explore all the aspects thoroughly and learn more about water pollution in the Oder River.
     """)
 
