@@ -43,10 +43,10 @@ coords = {
     "Szczecin": [14.605, 53.439, 11],
 }
 city_colors = {
-    "Ostrava": "#7CB3FE",
-    "Wroclaw": "#FCAE78",
-    "Frankfurt": "#64E789",
-    "Szczecin": "#A65FDB",
+    "Ostrava": "#FFA07A",
+    "Wroclaw": "#98FB98",
+    "Frankfurt": "#E6E6FA",
+    "Szczecin": "#87CEEB",
 }
 
 if not "city" in st.session_state:
@@ -145,6 +145,8 @@ if st.session_state.index_name and disaster_date is not None:
                     name=city,
                     hovertemplate=hover_template,
                     marker_color=city_colors[city],
+                    marker_line_color="black",
+                    marker_line_width=0.75
                 )
             )
 
