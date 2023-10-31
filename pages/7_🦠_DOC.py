@@ -34,6 +34,8 @@ colormap = get_vis_params_cache()[index_name]
 if not "layer" in st.session_state:
     st.session_state["layer"] = layers[-1]
 
+st.subheader("🦠 DOC - Dissolved Organic Carbon")
+
 tab1, tab2 = st.tabs(["🗺️ Map", "📈 Chart"])
 
 with tab1:
@@ -57,7 +59,7 @@ with tab1:
                 ]
 
     st.session_state["layer"] = widget.select_slider(
-        label="Wybierz datę zobrazowania", options=layers, value=st.session_state.layer
+        label="Choose imagery date", options=layers, value=st.session_state.layer
     )
 
     show_map(all_layers[st.session_state.layer], index_name, colormap)

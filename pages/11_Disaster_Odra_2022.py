@@ -149,7 +149,7 @@ if st.session_state.index_name and disaster_date is not None:
             )
 
         fig.update_layout(
-            title=f"{st.session_state.index_name} - median values from POIs",
+            title=f"{st.session_state.index_name} - median values from 100 POIs",
             yaxis_title="Value",
             height=550,
             width=610,

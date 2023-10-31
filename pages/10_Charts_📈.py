@@ -30,10 +30,7 @@ def get_period_stats_cache():
 def get_disaster_stats_cache():
     return get_adv_stats()["disaster_stats"]
 
-
-st.header(
-    "Explore to learn more about water quality index values ​​presented in graphs"
-)
+st.subheader("Analysis of water quality indicator results")
 st.title("\n")
 
 index_names = [

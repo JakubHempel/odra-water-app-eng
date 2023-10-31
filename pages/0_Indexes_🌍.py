@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(layout="wide", page_title="Indexes 🌍 | OdrApp 💦")
 
-st.title("Indeksy spektralne")
+st.title("Spectral indexes")
 st.markdown("""
             **NDWI** (*Normalized Difference Water Index*) - ... \n
             **NDVI** (*Normalized Difference Vegetation Index*) - ... \n
