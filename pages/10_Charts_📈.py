@@ -29,6 +29,7 @@ def get_period_stats_cache():
 @st.cache_data
 def get_disaster_stats_cache():
     return get_adv_stats()["disaster_stats"]
+    
 
 st.subheader("Analysis of water quality indicator results")
 st.title("\n")
