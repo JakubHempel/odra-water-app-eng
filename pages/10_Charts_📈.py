@@ -44,6 +44,17 @@ index_names = [
     "Cyanobacteria",
     "Turbidity",
 ]
+buttons_name = [
+    "💦 NDWI",
+    "💦 NDVI",
+    "💦 NDSI",
+    "🦠 SABI",
+    "🦠 CGI",
+    "🦠 CDOM",
+    "🦠 DOC",
+    "🦠 Cyanobacteria",
+    "🦠 Turbidity"
+]
 months = ["April", "May", "June", "July", "August", "September", "October"]
 years = ["2018", "2019", "2020", "2021", "2022", "2023"]
 
@@ -57,11 +68,11 @@ hover_template = "Value: %{y:.2f}<extra></extra>"
 
 with st.container():
     for i, index_name in enumerate(index_names):
-        if columns[i].button(index_name, help=f"{index_name} charts"):
+        if columns[i].button(buttons_name[i], help=f"{index_name} charts"):
             st.session_state["index"] = index_name
             with st.container():
                 tab1, tab2, tab3, tab4 = st.tabs(
-                    ["Annual plots", "Monthly plots", "Period plot", "Disaster plot"]
+                    ["📆 Annual plots", "📆 Monthly plots", "📆 Period plot", "☣️ Disaster plot"]
                 )
                 with tab1:
                     st.cache_data.clear()
