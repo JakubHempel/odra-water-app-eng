@@ -4,33 +4,33 @@ st.set_page_config(layout="wide", page_title="📃 Home | OdrApp 💦")
 
 # Customize page title
 st.title(
-    "Witaj w OdrApp! 💦"
+    "Welcome in OdrApp! 💦"
 )
 
 st.markdown(
     """
-    ***OdrApp*** to aplikacja służąca do monitoringu jakości wody w rzece Odra. Przedstawia ona wieloczasową analiza jakości wody z wykorzystaniem zobrazowań satelitarnych i Google Earth Engine. Obejmuje okres od 2018 do teraz, od kwietnia do października.
-    Eksploruj wszystkie strony do woli i dowiedz się więcej o zanieczyszczeniu wody w Odrze.
+    ***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporalwater quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October.\n
+    Explore all the aspects thoroughly and learn more about water pollution in the Oder River.
     """)
 
 st.divider()
 
 st.markdown("""
-    #### Sugerowane działania:
-    1. Przejdź do strony *Indexes* 🌍 i dowiedz się więcej o indekach spektralnych użytych w analizie.
-    2. Odwiedzaj strony indeksów:
-        - 💦 - powszechnie stosowane wskaźniki,
-        - 🦠 - związane stricte z zanieczyszczeniem i jakością wody.\n
-        Przeglądaj mapy z wizualizacją indeksów w zakładce 🗺️ Map i wykres liniowy przedstawiający średnią wartość indeksów na przestrzeni analizowanego okresu w zakładce 📈 Chart.
-    3. Wejdź na stronę *Charts* 📈 gdzie poznasz wizualizację wyników na wykresach, tj.
-        - "roczne",
-        - "miesięczne",
-        - okresowe,
-        - z katastrofy ekologicznej Odry 2022.
-    4. Na stronie *Disaster Odra 2022* znajdziesz rozszerzoną analizę jakości wody w 4 nadrzecznych miastach: Ostravie (CZ), Wrocławiu, Frankfurcie (DE) oraz Szczecinie.
+    #### Suggested actions:
+    1. Go to the *Indexes* 🌍 page and learn more about the spectral indices used in the analysis.
+    2. Visit the index pages:
+        - 💦 - commonly used indicators,
+        - 🦠 - related to water pollution and quality.
+        Explore maps with index visualizations in the 🗺️ Map tab and a line chart showing the average index values over the analyzed period in the 📈 Chart tab.
+    3. Visit the *Charts* 📈 page to explore result visualizations on charts, such as:
+        - "annual",
+        - "monthly",
+        - periodic,
+        - from the 2022 Oder River ecological disaster.
+    4. On the *Ecological Disaster - Oder 2022* page, you will find an extended analysis of water quality in four riverside cities: Ostrava (CZ), Wrocław, Frankfurt (DE), and Szczecin.
 
-    **Kolejność dowolna! Na start, pamiętaj o przeczytaniu o indeksach spektralnych na stronie *Indexes* 🌍.**
+    **You can follow these steps in any order you prefer! To start, make sure to read about spectral indices on the *Indexes* 🌍 page.**
 
-    ##### Miłego korzystania! 💦
+    ##### Enjoy your exploration! 💦
     """
 )
