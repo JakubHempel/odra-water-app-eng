@@ -29,7 +29,6 @@ def get_period_stats_cache():
 @st.cache_data
 def get_disaster_stats_cache():
     return get_adv_stats()["disaster_stats"]
-    
 
 st.subheader("Analysis of water quality indicator results")
 st.title("\n")
@@ -91,9 +90,9 @@ with st.container():
                                     y=yearly_data["Value"],
                                     mode="lines+markers",
                                     name=year,
-                                    line=dict(color="#E59866", width=2),
+                                    line=dict(color="#A6CEE3", width=2),
                                     marker=dict(
-                                        color="#E59866",
+                                        color="#A6CEE3",
                                         line=dict(color="black", width=1),
                                     ),
                                     hovertemplate=hover_template,
@@ -122,9 +121,9 @@ with st.container():
                                     y=monthly_data["Value"],
                                     mode="lines+markers",
                                     name=month,
-                                    line=dict(color="#48C9B0", width=2),
+                                    line=dict(color="#FFDAB9", width=2),
                                     marker=dict(
-                                        color="#48C9B0",
+                                        color="#FFDAB9",
                                         line=dict(color="black", width=1),
                                     ),
                                     hovertemplate=hover_template,
@@ -147,8 +146,8 @@ with st.container():
                         y=periods_data["spring"]["Mean"],
                         name="April-May",
                         mode="lines+markers",
-                        line=dict(color="brown", width=2),
-                        marker=dict(color="brown", line=dict(color="black", width=1)),
+                        line=dict(color="#FFB0B0", width=2),
+                        marker=dict(color="#FFB0B0", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
                     # Plot mean_df_ja
@@ -157,9 +156,9 @@ with st.container():
                         y=periods_data["summer"]["Mean"],
                         name="June-August",
                         mode="lines+markers",
-                        line=dict(color="lightseagreen", width=2),
+                        line=dict(color="#B0B0FF", width=2),
                         marker=dict(
-                            color="lightseagreen", line=dict(color="black", width=1)
+                            color="#B0B0FF", line=dict(color="black", width=1)
                         ),
                         hovertemplate=hover_template,
                     )
@@ -170,8 +169,8 @@ with st.container():
                         y=periods_data["autumn"]["Mean"],
                         name="September-October",
                         mode="lines+markers",
-                        line=dict(color="salmon", width=2),
-                        marker=dict(color="salmon", line=dict(color="black", width=1)),
+                        line=dict(color="#B0FFB0", width=2),
+                        marker=dict(color="#B0FFB0", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
 
@@ -214,8 +213,8 @@ with st.container():
                         y=disaster_data["2022"],
                         mode="lines+markers",
                         name="2022",
-                        line=dict(color="#864EFF", width=2),
-                        marker=dict(color="#864EFF", line=dict(color="black", width=1)),
+                        line=dict(color="#D8BFD8", width=2),
+                        marker=dict(color="#D8BFD8", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
 
