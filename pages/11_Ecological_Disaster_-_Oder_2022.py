@@ -44,7 +44,7 @@ coords = {
 }
 city_colors = {
     "Ostrava": "#FFA07A",
-    "Wroclaw": "#98FB98",
+    "Wroclaw": "#B6D79A",
     "Frankfurt": "#E6E6FA",
     "Szczecin": "#87CEEB",
 }

@@ -121,9 +121,9 @@ with st.container():
                                     y=monthly_data["Value"],
                                     mode="lines+markers",
                                     name=month,
-                                    line=dict(color="#FFDAB9", width=2),
+                                    line=dict(color="#BBBBA9", width=2),
                                     marker=dict(
-                                        color="#FFDAB9",
+                                        color="#BBBBA9",
                                         line=dict(color="black", width=1),
                                     ),
                                     hovertemplate=hover_template,
@@ -146,8 +146,8 @@ with st.container():
                         y=periods_data["spring"]["Mean"],
                         name="April-May",
                         mode="lines+markers",
-                        line=dict(color="#FFB0B0", width=2),
-                        marker=dict(color="#FFB0B0", line=dict(color="black", width=1)),
+                        line=dict(color="#B6D79A", width=2),
+                        marker=dict(color="#B6D79A", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
                     # Plot mean_df_ja
@@ -156,9 +156,9 @@ with st.container():
                         y=periods_data["summer"]["Mean"],
                         name="June-August",
                         mode="lines+markers",
-                        line=dict(color="#B0B0FF", width=2),
+                        line=dict(color="#FFB0B0", width=2),
                         marker=dict(
-                            color="#B0B0FF", line=dict(color="black", width=1)
+                            color="#FFB0B0", line=dict(color="black", width=1)
                         ),
                         hovertemplate=hover_template,
                     )
@@ -169,8 +169,8 @@ with st.container():
                         y=periods_data["autumn"]["Mean"],
                         name="September-October",
                         mode="lines+markers",
-                        line=dict(color="#B0FFB0", width=2),
-                        marker=dict(color="#B0FFB0", line=dict(color="black", width=1)),
+                        line=dict(color="#B0B0FF", width=2),
+                        marker=dict(color="#B0B0FF", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
 
@@ -213,8 +213,8 @@ with st.container():
                         y=disaster_data["2022"],
                         mode="lines+markers",
                         name="2022",
-                        line=dict(color="#D8BFD8", width=2),
-                        marker=dict(color="#D8BFD8", line=dict(color="black", width=1)),
+                        line=dict(color="#BF96FE", width=2),
+                        marker=dict(color="#BF96FE", line=dict(color="black", width=1)),
                         hovertemplate=hover_template,
                     )
 
