@@ -1,6 +1,14 @@
 import streamlit as st
 
-st.set_page_config(layout="wide", page_title="📃 Home | OdrApp 💦")
+st.set_page_config(page_title="📃 Home | OdrApp 💦")
+
+st.markdown("""
+<style>
+.align-text {
+    text-align: justify;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Customize page title
 st.title(
@@ -9,9 +17,9 @@ st.title(
 
 st.markdown(
     """
-    ***OdrApp*** is an application for monitoring water quality in the Oder river. It presents a multitemporal water quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October.\n
-    Explore all the aspects thoroughly and learn more about water pollution in the Oder River.
-    """)
+    <p class="align-text"> <i>OdrApp</i> is an application for monitoring water quality in the Oder river. It presents a multitemporal water quality analysis using satellite imagery and Google Earth Engine. It covers the period from 2018 to the present, from April to October.\n
+    Explore all the aspects thoroughly and learn more about water pollution in the Oder River.</p>
+    """, unsafe_allow_html=True)
 
 st.divider()
 
