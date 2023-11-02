@@ -21,10 +21,10 @@ frankfurt_buffer = ee.FeatureCollection("projects/jakub-hempel/assets/frankfurt_
 ostrava = ee.FeatureCollection("projects/jakub-hempel/assets/ostrava")
 ostrava_buffer = ee.FeatureCollection("projects/jakub-hempel/assets/ostrava_buffer")
 
-wroclaw_points = ee.FeatureCollection("projects/jakub-hempel/assets/wroclaw_points")
-szczecin_points = ee.FeatureCollection("projects/jakub-hempel/assets/szczecin_points")
-frankfurt_points = ee.FeatureCollection("projects/jakub-hempel/assets/frankfurt_points")
-ostrava_points = ee.FeatureCollection("projects/jakub-hempel/assets/ostrava_points")
+wroclaw_points = ee.FeatureCollection("projects/jakub-hempel/assets/wroclaw_points_100")
+szczecin_points = ee.FeatureCollection("projects/jakub-hempel/assets/szczecin_points_100")
+frankfurt_points = ee.FeatureCollection("projects/jakub-hempel/assets/frankfurt_points_100")
+ostrava_points = ee.FeatureCollection("projects/jakub-hempel/assets/ostrava_points_100")
 
 city_boundaries = {
     "Ostrava": ostrava,
