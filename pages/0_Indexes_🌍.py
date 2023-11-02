@@ -25,7 +25,7 @@ li {
 st.title("Spectral indexes")
 st.subheader("\n")
 st.markdown("""<p class="align-text"> Satellite imagery comes from the Sentinel-2 Level-2A satellite. These are multispectral, high-resolution (10 meters) images (Google Earth Engine Data Catalog 2023) from a mission conducted by the European Space Agency - ESA. 
-\n *All indexes formulas provided below and wavelenghts values are based on the satellite's bands from [Sentinel Online User Guide](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spectral).*</p>""", unsafe_allow_html=True)
+\n *All indexes formulas provided below and wavelengths values are based on the satellite's bands from [Sentinel Online User Guide](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spectral).*</p>""", unsafe_allow_html=True)
 st.divider()
 
 st.markdown("""<p class="align-text"> <span class="index-font-1"> <b>NDWI</b> (<i>Normalized Difference Water Index</i>)</span> - is used for water detection in satellite imagery. Values of NDWI greater than zero are interpreted as representing water surfaces, while values less than or equal to zero are assumed to indicate non-water surface (McFeeters 1996). There are many pixels combined of water and vegetation around the river or its shadows, which is why index values may deviate from ideal state that indicates the presence of water. The formula is based on bands, which central wavelengths are for Green (B3) - 560 nm and for NIR (B8) - 832 nm.</p>""", unsafe_allow_html=True)
@@ -40,11 +40,11 @@ st.markdown("""<p class="align-text"> <span class="index-font-1"> <b>NDSI</b> (<
 st.latex(r'''NDSI = \frac{Red - NIR}{Red + NIR} = \frac{B4 - B8}{B4 + B8}''')
 st.divider()
 
-st.markdown("""<p class="align-text"> <span class="index-font-2"> <b>SABI</b> (<i>Surface Algal Bloom Index</i>)</span> - it was developed by (Alawadi 2010) to identify the presence of biomass in water, using the NIR band, which is sensitive to green plants, Blue band (responsive to pure water), and Green band, which detect algal blooms within the water column. Algae bloom phenomenon are most likely to happen when the suitable conditons of sunlight, high water temperature and high level of nutrients exists. Moreover, highly eutrophic waters can help algae feed due to their high nitrogen and phosphorus content (Caballero et al. 2020). The range of index values for water is from -0.1 to 0 and approximately -0.2 and lower for microalgae (Kulawiak 2016).</p>""", unsafe_allow_html=True)
+st.markdown("""<p class="align-text"> <span class="index-font-2"> <b>SABI</b> (<i>Surface Algal Bloom Index</i>)</span> - it was developed by (Alawadi 2010) to identify the presence of biomass in water, using the NIR band, which is sensitive to green plants, Blue band (responsive to pure water), and Green band, which detect algal blooms within the water column. Algae bloom phenomenon are most likely to happen when the suitable conditions of sunlight, high water temperature and high level of nutrients exists. Moreover, highly eutrophic waters can help algae feed due to their high nitrogen and phosphorus content (Caballero et al. 2020). The range of index values for water is from -0.1 to 0 and approximately -0.2 and lower for microalgae (Kulawiak 2016).</p>""", unsafe_allow_html=True)
 st.latex(r'''SABI = \frac{NIR - Red}{Blue + Green} = \frac{B8 - B4}{B2 + B3}''')
 st.divider()
 
-st.markdown("""<p class="align-text"> <span class="index-font-2"> <b>CGI</b> (<i>Chlorophyll Green Index</i>)</span> - in general, the chlorophyll index is applied to determine the total amount of chlorophyll in plants. This variaton uses the SWIR (resolution 60 meters and central wavelenght at 945 nm) and Green channels in calculations.</p>""", unsafe_allow_html=True)
+st.markdown("""<p class="align-text"> <span class="index-font-2"> <b>CGI</b> (<i>Chlorophyll Green Index</i>)</span> - in general, the chlorophyll index is applied to determine the total amount of chlorophyll in plants. This variation uses the SWIR (resolution 60 meters and central wavelength at 945 nm) and Green channels in calculations.</p>""", unsafe_allow_html=True)
 st.latex(r'''CGI = \frac{SWIR}{Green}-1 = \frac{B9}{B3}-1''')
 st.divider()
 
