@@ -5,7 +5,6 @@ import gee_data as gd
 from imagery.water_indexes import water_indexes
 
 
-
 # Define the function to set DATE_ACQUIRED property to each image
 def add_date_property(image):
     date_acquired = image.date().format("YYYY-MM")
@@ -65,16 +64,11 @@ def get_sentinel_images(start_year, end_year, months):
                 .filterDate(start_date, end_date)
                 .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 50))
                 .median()
+                .divide(10000)
+                .clipToCollection(gd.odra)
             )
 
-            replacement_image = (
-                ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
-                .filterDate(start_date, end_date)
-                .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 25))
-                .median()
-            )
-
-            sentinel_image = clouds_remove(sentinel_image, replacement_image)
+            # sentinel_image = clouds_remove(sentinel_image, replacement_image)
 
             # Set the DATE_ACQUIRED property to the landsat image
             date_acquired = (
@@ -188,7 +182,17 @@ def get_all_layers():
     data = {}
 
     # List of index names
-    index_names = ["NDWI", "NDVI", "NDSI", "SABI", "CGI", "CDOM", "DOC", "Cyanobacteria", "Turbidity"]
+    index_names = [
+        "NDWI",
+        "NDVI",
+        "NDSI",
+        "SABI",
+        "CGI",
+        "CDOM",
+        "DOC",
+        "Cyanobacteria",
+        "Turbidity",
+    ]
 
     L_date = [
         "2018-04",
@@ -232,7 +236,7 @@ def get_all_layers():
         "2023-07",
         "2023-08",
         "2023-09",
-        "2023-10"
+        "2023-10",
     ]
 
     # Iterate through the index names
@@ -260,7 +264,17 @@ def get_all_disaster_layers():
     disaster_collections = get_disaster_images()
     data = {}
 
-    index_names = ["NDWI", "NDVI", "NDSI", "SABI", "CGI", "CDOM", "DOC", "Cyanobacteria", "Turbidity"]
+    index_names = [
+        "NDWI",
+        "NDVI",
+        "NDSI",
+        "SABI",
+        "CGI",
+        "CDOM",
+        "DOC",
+        "Cyanobacteria",
+        "Turbidity",
+    ]
 
     L_date = ["2022-07-20", "2022-07-31", "2022-08-25"]
 
