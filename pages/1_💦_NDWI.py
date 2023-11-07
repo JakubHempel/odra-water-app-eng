@@ -1,4 +1,5 @@
 import streamlit as st
+
 st.set_page_config(layout="wide", page_title="💦 NDWI | OdrApp 💦")
 
 from maps.show_map import show_map
@@ -68,7 +69,7 @@ with tab2:
     with st.container():
         with col1:
             st.subheader(f"{index_name} line plot")
-            st.line_chart(get_stats_cache()[index_name]["mean"], color="#20B2AA")
+            st.line_chart(get_stats_cache()[index_name])
         with col2:
             st.subheader("Data")
             st.write(get_stats_cache()[index_name])

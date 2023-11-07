@@ -143,7 +143,7 @@ with st.container():
                     # Plot mean_df_am
                     trace1 = go.Scatter(
                         x=periods_data["spring"].index,
-                        y=periods_data["spring"]["Mean"],
+                        y=periods_data["spring"]["Median"],
                         name="April-May",
                         mode="lines+markers",
                         line=dict(color="#B6D79A", width=2),
@@ -153,7 +153,7 @@ with st.container():
                     # Plot mean_df_ja
                     trace2 = go.Scatter(
                         x=periods_data["summer"].index,
-                        y=periods_data["summer"]["Mean"],
+                        y=periods_data["summer"]["Median"],
                         name="June-August",
                         mode="lines+markers",
                         line=dict(color="#FFB0B0", width=2),
@@ -166,7 +166,7 @@ with st.container():
                     # Plot mean_df_so
                     trace3 = go.Scatter(
                         x=periods_data["autumn"].index,
-                        y=periods_data["autumn"]["Mean"],
+                        y=periods_data["autumn"]["Median"],
                         name="September-October",
                         mode="lines+markers",
                         line=dict(color="#B0B0FF", width=2),
@@ -222,7 +222,7 @@ with st.container():
 
                     fig.update_layout(
                         yaxis_title="Value",
-                        title=f"{st.session_state.index} - mean value - ecological disaster on the Oder 2022",
+                        title=f"{st.session_state.index} - median value - ecological disaster on the Oder 2022",
                         title_font=dict(family="Tahoma", size=20),
                         height=600,
                         width=800,
