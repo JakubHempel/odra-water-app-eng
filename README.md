@@ -9,7 +9,7 @@
     - 💦 - commonly used indicators,
     - 🦠 - related to water pollution and quality.
 
-    Explore maps with index visualizations in the 🗺️ Map tab and a line chart showing the average index values over the analyzed period in the 📈 Chart tab.
+    Explore maps with index visualizations in the 🗺️ Map tab and a line chart showing the average and median index values over the analyzed period in the 📈 Chart tab.
 
 3. Visit the *Charts* 📈 page to explore result visualizations on charts, such as:
     - "annual",
