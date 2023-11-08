@@ -16,7 +16,7 @@ def show_map(cache_image, index_name, vis_param):
     image = cache_image
     layer_name = image.get("system:index").getInfo()
 
-    Map = geemap.Map(layer_ctrl=True, basemap="Esri.WorldGrayCanvas")
+    Map = geemap.Map(layer_ctrl=True, basemap="Esri.WorldGrayCanvas", control_scale=True)
     minimap = plugins.MiniMap()
     Map.add_child(minimap)  
     Map.addLayer(image.select(index_name), vis_param, f"{index_name} - {layer_name}")
@@ -30,7 +30,7 @@ def show_map(cache_image, index_name, vis_param):
 
 
 def disaster_map(cache_image, index_name, city, vis_param, zoom):
-    Map = geemap.Map(basemap="Esri.WorldGrayCanvas")
+    Map = geemap.Map(basemap="Esri.WorldGrayCanvas", control_scale=True)
     minimap = plugins.MiniMap()
     Map.add_child(minimap)  
 
