@@ -1,5 +1,8 @@
 import streamlit as st
-st.set_page_config(layout="wide", page_title="Ecological Disaster - Oder 2022 | OdrApp 💦")
+
+st.set_page_config(
+    layout="wide", page_title="Ecological Disaster - Oder 2022 | OdrApp 💦"
+)
 
 import plotly.graph_objects as go
 import pandas as pd
@@ -146,7 +149,7 @@ if st.session_state.index_name and disaster_date is not None:
                     hovertemplate=hover_template,
                     marker_color=city_colors[city],
                     marker_line_color="black",
-                    marker_line_width=0.75
+                    marker_line_width=0.75,
                 )
             )
 
@@ -160,15 +163,23 @@ if st.session_state.index_name and disaster_date is not None:
         st.plotly_chart(fig)
 
 with col3:
-    if (
-        st.session_state.city
-        and st.session_state.index_name
-        and st.session_state.disaster_layer is not None
-    ):
-        disaster_map(
-            disaster_layers[st.session_state.disaster_layer],
-            st.session_state.index_name,
-            st.session_state.city,
-            colormap,
-            st.session_state.zoom,
-        )
+    try:
+        if (
+            st.session_state.city
+            and st.session_state.index_name
+            and st.session_state.disaster_layer is not None
+        ):
+            disaster_map(
+                disaster_layers[st.session_state.disaster_layer],
+                st.session_state.index_name,
+                st.session_state.city,
+                colormap,
+                st.session_state.zoom,
+            )
+    except:
+        st.header("\n")
+        st.warning("Make sure you have filled in all the fields", icon="⚠️")
+    finally:
+        st.session_state["city"] = None
+        st.session_state["index_name"] = None
+        st.session_state["disaster_layer"] = None
