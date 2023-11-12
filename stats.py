@@ -602,3 +602,25 @@ def get_disaster_stats():
         "during": during_median_df,
         "after": after_median_df,
     }
+
+
+def get_sections_stats():
+    data = {
+        'SABI': [{"date": "2022-07-20", "Warta - Zalew Szczecinski": -0.09, "Kanal Gliwicki": 0.52},
+                 {"date": "2022-07-31", "Warta - Zalew Szczecinski": -0.16, "Kanal Gliwicki": 0.52},
+                 {"date": "2022-08-25", "Warta - Zalew Szczecinski": -0.11, "Kanal Gliwicki": 0.58}],
+        'CDOM': [{"date": "2022-07-20", "Warta - Zalew Szczecinski": 7.49, "Kanal Gliwicki": 6.74},
+                 {"date": "2022-07-31", "Warta - Zalew Szczecinski": 3.52, "Kanal Gliwicki": 4.24},
+                 {"date": "2022-08-25", "Warta - Zalew Szczecinski": 8.50, "Kanal Gliwicki": 12.25}],
+        'DOC': [{"date": "2022-07-20", "Warta - Zalew Szczecinski": 15.48, "Kanal Gliwicki": 15.22},
+                {"date": "2022-07-31", "Warta - Zalew Szczecinski": 10.47, "Kanal Gliwicki": 10.25},
+                {"date": "2022-08-25", "Warta - Zalew Szczecinski": 18.50, "Kanal Gliwicki": 23.75}],
+        'Cyanobacteria': [{"date": "2022-07-20", "Warta - Zalew Szczecinski": 27.07, "Kanal Gliwicki": 79.10},
+                          {"date": "2022-07-31", "Warta - Zalew Szczecinski": 25.48, "Kanal Gliwicki": 45.21},
+                          {"date": "2022-08-25", "Warta - Zalew Szczecinski": 64.46, "Kanal Gliwicki": 46.73}]
+    }
+
+    for index in data.keys():
+        data[index] = pd.DataFrame.from_dict(data[index]).set_index("date")
+    
+    return data

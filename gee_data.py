@@ -26,6 +26,20 @@ szczecin_points = ee.FeatureCollection("projects/jakub-hempel/assets/szczecin_po
 frankfurt_points = ee.FeatureCollection("projects/jakub-hempel/assets/frankfurt_points_100")
 ostrava_points = ee.FeatureCollection("projects/jakub-hempel/assets/ostrava_points_100")
 
+kanal_gliwicki = ee.FeatureCollection('projects/jakub-hempel/assets/kanal_gliwicki_wgs84')
+
+geojson = {
+    'type': 'Polygon',
+    'coordinates': [[[14.483845, 52.564113],
+                     [14.78914, 52.58696],
+                     [14.80168, 54.005695],
+                     [13.686192, 53.950777],
+                     [13.922478, 52.982902],
+                     [14.153269, 52.657586],
+                     [14.483845, 52.56113]]]}
+
+warta = ee.FeatureCollection(ee.Geometry(geojson))
+
 city_boundaries = {
     "Ostrava": ostrava,
     "Wroclaw": wroclaw,
