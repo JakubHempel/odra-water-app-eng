@@ -16,9 +16,11 @@ def show_map(cache_image, index_name, vis_param):
     image = cache_image
     layer_name = image.get("system:index").getInfo()
 
-    Map = geemap.Map(layer_ctrl=True, basemap="Esri.WorldGrayCanvas", control_scale=True)
+    Map = geemap.Map(
+        layer_ctrl=True, basemap="Esri.WorldGrayCanvas", control_scale=True
+    )
     minimap = plugins.MiniMap()
-    Map.add_child(minimap)  
+    Map.add_child(minimap)
     Map.addLayer(image.select(index_name), vis_param, f"{index_name} - {layer_name}")
     Map.add_colorbar(vis_param, label=f"{index_name} Index")
 
@@ -32,7 +34,7 @@ def show_map(cache_image, index_name, vis_param):
 def disaster_map(cache_image, index_name, city, vis_param, zoom):
     Map = geemap.Map(basemap="Esri.WorldGrayCanvas", control_scale=True)
     minimap = plugins.MiniMap()
-    Map.add_child(minimap)  
+    Map.add_child(minimap)
 
     boundries_style = {
         "color": "#CD5C5C",
@@ -71,3 +73,34 @@ def disaster_map(cache_image, index_name, city, vis_param, zoom):
 
     Map.setCenter(*zoom)
     Map.to_streamlit(height=800)
+
+
+def sections_map(warta_collection, kanal_gliwicki_collection, ran):
+    sections_collection = warta_collection.merge(kanal_gliwicki_collection)
+    sections_list = sections_collection.toList(6)
+
+    Map = geemap.Map(basemap="Esri.WorldGrayCanvas", control_scale=True)
+    minimap = plugins.MiniMap()
+    Map.add_child(minimap)
+
+    indexes = ["SABI", "CDOM", "DOC", "Cyanobacteria"]
+    vis_params = get_vis_params_cache()
+
+    for i in ran:
+        image = ee.Image(sections_list.get(i))
+        name = image.get("NAME").getInfo()
+        date_acquired = image.get("DATE_ACQUIRED").getInfo()
+        for index_name in indexes:
+            Map.addLayer(
+                image.select(index_name),
+                vis_params[index_name],
+                f"{index_name} - {name} - {date_acquired}",
+                False,
+            )
+
+    with st.spinner("Wait for the map ..."):
+        time.sleep(1)
+
+    Map.setCenter(16.355, 51.988, zoom=7)
+
+    Map.to_streamlit(height=700)
