@@ -33,18 +33,21 @@ def clouds_remove(sentinel_image, replacement_image=None):
         image_replace = sentinel_image.updateMask(cloud_mask)
 
     sentinel_image = (
-        ee.ImageCollection([image_cm, image_replace])
-        .median()
-        .divide(10000)
-        .clipToCollection(gd.odra)
+        ee.ImageCollection([image_cm, image_replace]).median().divide(10000)
     )
 
     return sentinel_image
 
 
-def clip_sentinel_disaster(image, aoi, date):
+def clip_to_odra(image):
+    image = image.clipToCollection(gd.odra)
+    return image
+
+
+def clip_sentinel_disaster(image, aoi, date, name=None):
     sentinel_image = clouds_remove(image.clipToCollection(aoi))
     sentinel_image = sentinel_image.set("DATE_ACQUIRED", date)
+    sentinel_image = sentinel_image.set("NAME", name)
 
     return sentinel_image
 
@@ -116,17 +119,21 @@ def get_disaster_images():
         post_disaster, gd.wroclaw_buffer, "2022-08-25"
     )
 
-    wroclaw_collection = ee.ImageCollection.fromImages(
-        [wroclaw_pre, wroclaw_dur, wroclaw_post]
-    ).map(water_indexes)
+    wroclaw_collection = (
+        ee.ImageCollection.fromImages([wroclaw_pre, wroclaw_dur, wroclaw_post])
+        .map(clip_to_odra)
+        .map(water_indexes)
+    )
 
     szczecin_pre = clip_sentinel_disaster(pre_disaster, gd.szczecin, "2022-07-20")
     szczecin_dur = clip_sentinel_disaster(dur_disaster, gd.szczecin, "2022-07-31")
     szczecin_post = clip_sentinel_disaster(post_disaster, gd.szczecin, "2022-08-25")
 
-    szczecin_collection = ee.ImageCollection.fromImages(
-        [szczecin_pre, szczecin_dur, szczecin_post]
-    ).map(water_indexes)
+    szczecin_collection = (
+        ee.ImageCollection.fromImages([szczecin_pre, szczecin_dur, szczecin_post])
+        .map(clip_to_odra)
+        .map(water_indexes)
+    )
 
     frankfurt_pre = clip_sentinel_disaster(
         pre_disaster, gd.frankfurt_buffer, "2022-07-20"
@@ -138,9 +145,11 @@ def get_disaster_images():
         post_disaster, gd.frankfurt_buffer, "2022-08-25"
     )
 
-    frankfurt_collection = ee.ImageCollection.fromImages(
-        [frankfurt_pre, frankfurt_dur, frankfurt_post]
-    ).map(water_indexes)
+    frankfurt_collection = (
+        ee.ImageCollection.fromImages([frankfurt_pre, frankfurt_dur, frankfurt_post])
+        .map(clip_to_odra)
+        .map(water_indexes)
+    )
 
     ostrava_pre = clip_sentinel_disaster(pre_disaster, gd.ostrava_buffer, "2022-07-20")
     ostrava_dur = clip_sentinel_disaster(dur_disaster, gd.ostrava_buffer, "2022-07-31")
@@ -148,8 +157,28 @@ def get_disaster_images():
         post_disaster, gd.ostrava_buffer, "2022-08-25"
     )
 
-    ostrava_collection = ee.ImageCollection.fromImages(
-        [ostrava_pre, ostrava_dur, ostrava_post]
+    ostrava_collection = (
+        ee.ImageCollection.fromImages([ostrava_pre, ostrava_dur, ostrava_post])
+        .map(clip_to_odra)
+        .map(water_indexes)
+    )
+
+    warta_pre = clip_sentinel_disaster(pre_disaster, gd.warta, '2022-07-20', 'Ujscie Warty')
+    warta_dur = clip_sentinel_disaster(dur_disaster, gd.warta, '2022-07-31', 'Ujscie Warty')
+    warta_post = clip_sentinel_disaster(post_disaster, gd.warta, '2022-08-25', 'Ujscie Warty')
+
+    warta_collection = (
+        ee.ImageCollection.fromImages([warta_pre, warta_dur, warta_post])
+        .map(clip_to_odra)
+        .map(water_indexes)
+    )
+
+    kanal_gliwicki_pre = clip_sentinel_disaster(pre_disaster, gd.kanal_gliwicki, '2022-07-20', 'Kanal Gliwicki')
+    kanal_gliwicki_dur = clip_sentinel_disaster(dur_disaster, gd.kanal_gliwicki, '2022-07-31', 'Kanal Gliwicki')
+    kanal_gliwicki_post = clip_sentinel_disaster(post_disaster, gd.kanal_gliwicki, '2022-08-25', 'Kanal Gliwicki')
+
+    kanal_gliwicki_collection = ee.ImageCollection.fromImages(
+        [kanal_gliwicki_pre, kanal_gliwicki_dur, kanal_gliwicki_post]
     ).map(water_indexes)
 
     return {
@@ -157,6 +186,8 @@ def get_disaster_images():
         "Szczecin": szczecin_collection,
         "Frankfurt": frankfurt_collection,
         "Ostrava": ostrava_collection,
+        "UjscieWarty": warta_collection,
+        "KanalGliwicki": kanal_gliwicki_collection,
     }
 
 
