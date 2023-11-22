@@ -209,10 +209,8 @@ water_collection = sentinel2_collection.map(water_indexes)
 
 
 def get_all_layers():
-    # Initialize the nested directory structure
     data = {}
 
-    # List of index names
     index_names = [
         "NDWI",
         "NDVI",
@@ -225,67 +223,32 @@ def get_all_layers():
         "Turbidity",
     ]
 
-    L_date = [
-        "2018-04",
-        "2018-05",
-        "2018-06",
-        "2018-07",
-        "2018-08",
-        "2018-09",
-        "2018-10",
-        "2019-04",
-        "2019-05",
-        "2019-06",
-        "2019-07",
-        "2019-08",
-        "2019-09",
-        "2019-10",
-        "2020-04",
-        "2020-05",
-        "2020-06",
-        "2020-07",
-        "2020-08",
-        "2020-09",
-        "2020-10",
-        "2021-04",
-        "2021-05",
-        "2021-06",
-        "2021-07",
-        "2021-08",
-        "2021-09",
-        "2021-10",
-        "2022-04",
-        "2022-05",
-        "2022-06",
-        "2022-07",
-        "2022-08",
-        "2022-09",
-        "2022-10",
-        "2023-04",
-        "2023-05",
-        "2023-06",
-        "2023-07",
-        "2023-08",
-        "2023-09",
-        "2023-10",
-    ]
+    current_date = datetime.now()
+    L_date = []
+    
+    # Start date
+    start_date = datetime(2018, 4, 1)
 
-    # Iterate through the index names
+    # End date
+    end_date = datetime(current_date.year, current_date.month, 1)
+    
+    # Generate dates and filter months from April to October
+    while start_date < end_date:
+        if start_date.month >= 4 and start_date.month <= 10:
+            L_date.append(start_date.strftime('%Y-%m'))
+        new_month = start_date.month + 1
+        new_year = start_date.year + 1 if new_month > 12 else start_date.year
+        start_date = start_date.replace(year=new_year, month=new_month if new_month <= 12 else 1)
+
     for index_name in index_names:
-        # Initialize a sub-dictionary for the index
         data[index_name] = {}
 
-        # Iterate through the available dates (yyyy-mm format)
-        for date in L_date:  # Replace with your list of dates
-            # Filter the Image Collection by date
+        for date in L_date:
             filtered_collection = water_collection.filter(
                 ee.Filter.eq("DATE_ACQUIRED", date)
             )
 
-            # Get the first image from the filtered collection (you can adjust this logic if needed)
             first_image = filtered_collection.first().select(index_name)
-
-            # Add the image to the sub-dictionary
             data[index_name][date] = first_image
 
     return data
