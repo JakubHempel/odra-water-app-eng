@@ -60,12 +60,13 @@ with tab1:
         value=st.session_state.layer,
     )
 
-    show_map(
-        all_layers[st.session_state.layer],
-        st.session_state.layer,
-        index_name,
-        colormap,
-    )
+    with st.spinner("Wait for the map ..."):
+        show_map(
+            all_layers[st.session_state.layer],
+            st.session_state.layer,
+            index_name,
+            colormap,
+        )
 
 with tab2:
     col1, col2 = st.columns((3, 1))
