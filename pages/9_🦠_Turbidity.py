@@ -74,5 +74,5 @@ with tab2:
             st.subheader(f"{index_name} line plot")
             st.line_chart(get_stats_cache()[index_name])
         with col2:
-            st.subheader("Data")
+            st.subheader("Data [NTU]")
             st.write(get_stats_cache()[index_name])
