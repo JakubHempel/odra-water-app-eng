@@ -16,7 +16,10 @@
     - "monthly",
     - periodic,
     - from the 2022 Oder River ecological disaster.
-4. On the *Ecological Disaster - Oder 2022* page, you will find an extended analysis of water quality in four riverside cities: Ostrava (CZ), Wrocław, Frankfurt (DE), and Szczecin.
+4. In the group of *Ecological Disaster - Oder 2022* pages, you will find an extended analysis of water quality in:
+    - four riverside cities: Ostrava (CZ), Wrocław, Frankfurt (DE), and Szczecin (in the Cities Analysis 🏙️ page),
+    - in two sections of Oder. Firstly, *Kanal Gliwicki*, when the disaster had started, and secondly the part from the place where the Warta River flows into the river up to its estuary to the Baltic Sea (in the Sections Analysis ✂️ page),
+    - the Sections Chart 📈 page is still in progress 🙂.
    
 **You can follow these steps in any order you prefer! To start, make sure to read about spectral indices on the *Indexes* 🌍 page.**
 
