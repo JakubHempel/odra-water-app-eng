@@ -1,5 +1,6 @@
 import streamlit as st
-st.set_page_config(layout="wide", page_title="💦 NDVI | OdrApp 💦")
+
+st.set_page_config(layout="wide", page_title="💦 NDWI | OdrApp 💦")
 
 from maps.show_map import show_map
 from maps.visualizationparams import get_vis_params
@@ -30,14 +31,14 @@ layers = list(all_layers.keys())
 
 colormap = get_vis_params_cache()[index_name]
 
-if not "layer" in st.session_state:
-    st.session_state["layer"] = layers[-1]
-
 st.subheader("💦 NDVI - Normalized Difference Vegetation Index")
 
 tab1, tab2 = st.tabs(["🗺️ Map", "📈 Chart"])
 
 with tab1:
+    if not "layer" in st.session_state:
+        st.session_state["layer"] = layers[-1]
+
     widget = st.empty()
     col1, col2, col3 = st.columns((1, 9, 0.8))
     with col1:
@@ -45,23 +46,26 @@ with tab1:
             if st.session_state.layer == layers[0]:
                 st.session_state["layer"] = layers[-1]
             else:
-                st.session_state["layer"] = layers[
-                    layers.index(st.session_state.layer) - 1
-                ]
+                st.session_state["layer"] = layers[layers.index(st.session_state.layer) - 1]
     with col3:
         if st.button("Next layer", type="primary"):
             if st.session_state.layer == layers[-1]:
                 st.session_state["layer"] = layers[0]
             else:
-                st.session_state["layer"] = layers[
-                    layers.index(st.session_state.layer) + 1
-                ]
+                st.session_state["layer"] = layers[layers.index(st.session_state.layer) + 1]
 
     st.session_state["layer"] = widget.select_slider(
-        label="Choose imagery date", options=layers, value=st.session_state.layer
+        label="Choose imagery date",
+        options=layers,
+        value=st.session_state.layer,
     )
 
-    show_map(all_layers[st.session_state.layer], index_name, colormap)
+    show_map(
+        all_layers[st.session_state.layer],
+        st.session_state.layer,
+        index_name,
+        colormap,
+    )
 
 with tab2:
     col1, col2 = st.columns((3, 1))
