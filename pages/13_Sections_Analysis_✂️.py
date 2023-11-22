@@ -38,12 +38,13 @@ with col1:
     )
 
 with col2:
-    if disaster_layer == "Before disaster":
-        sections_map(warta_collection, kanal_gliwicki_collection, range(0, 4, 3))
-    elif disaster_layer == "During disaster":
-        sections_map(warta_collection, kanal_gliwicki_collection, range(1, 5, 3))
-    elif disaster_layer == "After disaster":
-        sections_map(warta_collection, kanal_gliwicki_collection, range(2, 6, 3))
+    with st.spinner("Wait for the map ..."):
+        if disaster_layer == "Before disaster":
+            sections_map(warta_collection, kanal_gliwicki_collection, range(0, 4, 3))
+        elif disaster_layer == "During disaster":
+            sections_map(warta_collection, kanal_gliwicki_collection, range(1, 5, 3))
+        elif disaster_layer == "After disaster":
+            sections_map(warta_collection, kanal_gliwicki_collection, range(2, 6, 3))
 
 with col3:
     urllib.request.urlretrieve(
@@ -60,13 +61,13 @@ with chart1:
     st.subheader("SABI Median Disaster Values")
     st.line_chart(get_sections_stats_cache()["SABI"])
 
-    st.subheader("DOC Median Disaster Values")
+    st.subheader("DOC Median Disaster Values [mg/l]")
     st.line_chart(get_sections_stats_cache()["DOC"])
 
 with chart2:
     st.header("\n")
-    st.subheader("CDOM Median Disaster Values")
+    st.subheader("CDOM Median Disaster Values [mg/l]")
     st.line_chart(get_sections_stats_cache()["CDOM"])
 
-    st.subheader("Cyanobacteria Median Disaster Values")
+    st.subheader("Cyanobacteria Median Disaster Values [10^3 cell/ml]")
     st.line_chart(get_sections_stats_cache()["Cyanobacteria"])
