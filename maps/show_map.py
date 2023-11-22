@@ -31,9 +31,6 @@ def show_map(cache_image, layer_name, index_name, vis_param):
 
     Map.add_colorbar(vis_param, label=label_name) 
 
-    with st.spinner("Wait for the map ..."):
-        time.sleep(1)
-
     Map.setCenter(17.036, 51.111, 11)
     Map.to_streamlit(height=800)
 
@@ -81,9 +78,6 @@ def disaster_map(cache_image, layer_name, index_name, city, vis_param, zoom):
 
     Map.add_colorbar(vis_param, label=label_name)
 
-    with st.spinner("Wait for the map ..."):
-        time.sleep(1)
-
     Map.setCenter(*zoom)
     Map.to_streamlit(height=800)
 
@@ -110,9 +104,6 @@ def sections_map(warta_collection, kanal_gliwicki_collection, ran):
                 f"{index_name} - {name} - {date_acquired}",
                 False,
             )
-
-    with st.spinner("Wait for the map ..."):
-        time.sleep(1)
 
     Map.setCenter(16.355, 51.988, zoom=7)
 
