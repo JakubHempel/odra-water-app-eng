@@ -33,6 +33,17 @@ def get_sections_layers_cache():
 def get_disaster_stats_cache():
     return get_disaster_stats()
 
+if not "city" in st.session_state:
+    st.session_state["city"] = None
+
+if not "index_name" in st.session_state:
+    st.session_state["index_name"] = None
+
+if not "zoom" in st.session_state:
+    st.session_state["zoom"] = None
+
+if not "disaster_layer" in st.session_state:
+    st.session_state["disaster_layer"] = None
 
 cities = ["Ostrava", "Wroclaw", "Frankfurt", "Szczecin"]
 indexes = [
@@ -59,80 +70,75 @@ city_colors = {
     "Szczecin": "#87CEEB",
 }
 
-
-if not "city" in st.session_state:
-    st.session_state["city"] = None
-
-if not "index_name" in st.session_state:
-    st.session_state["index_name"] = None
-
-if not "zoom" in st.session_state:
-    st.session_state["zoom"] = None
+st.info("Select city, index name and date of disaster layer you want to visualize.",icon="ℹ️")
 
 col1, col2, col3 = st.columns((2, 1.5, 5))
 
 with col1:
-    st.session_state["city"] = st.selectbox(
-        "Choose city", ("Ostrava", "Wroclaw", "Frankfurt", "Szczecin"), index=None
-    )
+    with st.form(key="cities_form"):
+        st.session_state["city"] = st.selectbox(
+            "Choose city", ("Ostrava", "Wroclaw", "Frankfurt", "Szczecin"), index=None
+        )
 
-    st.divider()
+        st.session_state["index_name"] = st.selectbox(
+            "Choose index",
+            (
+                "NDWI",
+                "NDVI",
+                "NDSI",
+                "SABI",
+                "CGI",
+                "CDOM",
+                "DOC",
+                "Cyanobacteria",
+                "Turbidity",
+            ),
+            index=None,
+        )
 
-    st.session_state["index_name"] = st.selectbox(
-        "Choose index",
-        (
-            "NDWI",
-            "NDVI",
-            "NDSI",
-            "SABI",
-            "CGI",
-            "CDOM",
-            "DOC",
-            "Cyanobacteria",
-            "Turbidity",
-        ),
-        index=None,
-    )
+        disaster_date = st.radio(
+            "Choose the layer you want to see",
+            ["Before disaster", "During disaster", "After disaster"],
+            captions=["2022-07-20", "2022-07-31", "2022-08-25"],
+            index=None,
+        )
 
-if st.session_state.city and st.session_state.index_name is not None:
-    disaster_layers = get_disaster_layers_cache()[st.session_state.city][
-        st.session_state.index_name
-    ]
-    layers = list(disaster_layers.keys())
-    colormap = get_vis_params_cache()[st.session_state.index_name]
-
-if not "disaster_layer" in st.session_state:
-    st.session_state["disaster_layer"] = None
-
-with col1:
-    st.divider()
-    disaster_date = st.radio(
-        "Choose the layer you want to see",
-        ["Before disaster", "During disaster", "After disaster"],
-        captions=["2022-07-20", "2022-07-31", "2022-08-25"],
-        index=None,
-    )
+        st.subheader("\n")
+        submitted = st.form_submit_button("Submit")
 
 try:
-    if disaster_date == "Before disaster":
-        st.session_state["disaster_layer"] = layers[0]
-    elif disaster_date == "During disaster":
-        st.session_state["disaster_layer"] = layers[1]
-    elif disaster_date == "After disaster":
-        st.session_state["disaster_layer"] = layers[2]
+    if submitted:
+        disaster_layers = get_disaster_layers_cache()[st.session_state.city][st.session_state.index_name]
+        layers = list(disaster_layers.keys())
+        colormap = get_vis_params_cache()[st.session_state.index_name]
+
+        if disaster_date == "Before disaster":
+            st.session_state["disaster_layer"] = layers[0]
+        elif disaster_date == "During disaster":
+            st.session_state["disaster_layer"] = layers[1]
+        elif disaster_date == "After disaster":
+            st.session_state["disaster_layer"] = layers[2]
+        
+        st.session_state["zoom"] = coords[st.session_state.city]
 except:
     with col3:
         st.header("\n")
         st.warning("Please fill all selectboxes", icon="⚠️")
 
-if st.session_state.city is not None:
-    st.session_state["zoom"] = coords[st.session_state.city]
 
 disaster_stats = get_disaster_stats_cache()
 
 if st.session_state.index_name and disaster_date is not None:
     with col1:
-        st.divider()
+        if st.session_state.index_name in ['CDOM', 'DOC']:
+            y_name = "mg/l"
+        elif st.session_state.index_name == 'Cyanobacteria':
+            y_name = "10^3 cell/ml"
+        elif st.session_state.index_name == 'Turbidity':
+            y_name = "NTU"
+        else:
+            y_name = "Value"
+
         hover_template = "Value: %{y:.2f}<extra></extra>"
 
         fig = go.Figure()
@@ -163,7 +169,7 @@ if st.session_state.index_name and disaster_date is not None:
 
         fig.update_layout(
             title=f"{st.session_state.index_name} - median values from 100 POIs",
-            yaxis_title="Value",
+            yaxis_title=y_name,
             height=550,
             width=610,
         )
@@ -171,24 +177,15 @@ if st.session_state.index_name and disaster_date is not None:
         st.plotly_chart(fig)
 
 with col3:
-    try:
-        if (
-            st.session_state.city
-            and st.session_state.index_name
-            and st.session_state.disaster_layer is not None
-        ):
-            disaster_map(
-                disaster_layers[st.session_state.disaster_layer],
-                st.session_state.disaster_layer,
-                st.session_state.index_name,
-                st.session_state.city,
-                colormap,
-                st.session_state.zoom,
-            )
-    except:
-        st.header("\n")
-        st.warning("Make sure you have filled in all the fields", icon="⚠️")
-    finally:
-        st.session_state["city"] = None
-        st.session_state["index_name"] = None
-        st.session_state["disaster_layer"] = None
+        if 'disaster_layers' in globals():
+            if all(el is not None for el in [st.session_state.city, st.session_state.index_name, st.session_state.disaster_layer]):
+                with st.spinner("Wait for the map ..."):
+                    disaster_map(
+                        disaster_layers[st.session_state.disaster_layer],
+                        st.session_state.disaster_layer,
+                        st.session_state.index_name,
+                        st.session_state.city,
+                        colormap,
+                        st.session_state.zoom,
+                    )
+
