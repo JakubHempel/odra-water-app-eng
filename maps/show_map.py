@@ -19,7 +19,17 @@ def show_map(cache_image, layer_name, index_name, vis_param):
     minimap = plugins.MiniMap()
     Map.add_child(minimap)
     Map.addLayer(cache_image.select(index_name), vis_param, f"{index_name} - {layer_name}")
-    Map.add_colorbar(vis_param, label=f"{index_name} colorbar")
+
+    if index_name in ['CDOM', 'DOC']:
+        label_name = f"{index_name} Colorbar [mg/l]"
+    elif index_name == 'Cyanobacteria':
+        label_name = f"{index_name} Colorbar [10^3 cell/ml]"
+    elif index_name == 'Turbidity':
+        label_name = f"{index_name} Colorbar [NTU]"
+    else:
+        label_name = f"{index_name} Colorbar"
+
+    Map.add_colorbar(vis_param, label=label_name) 
 
     with st.spinner("Wait for the map ..."):
         time.sleep(1)
@@ -60,7 +70,16 @@ def disaster_map(cache_image, layer_name, index_name, city, vis_param, zoom):
     Map.addLayer(gd.city_boundaries[city].style(**boundries_style), {}, city)
     Map.addLayer(gd.pois[city].style(**points_style), {}, f"POIs - {city}", False)
 
-    Map.add_colorbar(vis_param, label=f"{index_name} colorbar")
+    if index_name in ['CDOM', 'DOC']:
+        label_name = f"{index_name} Colorbar [mg/l]"
+    elif index_name == 'Cyanobacteria':
+        label_name = f"{index_name} Colorbar [10^3 cell/ml]"
+    elif index_name == 'Turbidity':
+        label_name = f"{index_name} Colorbar [NTU]"
+    else:
+        label_name = f"{index_name} Colorbar"
+
+    Map.add_colorbar(vis_param, label=label_name)
 
     with st.spinner("Wait for the map ..."):
         time.sleep(1)
