@@ -12,17 +12,14 @@ def get_vis_params_cache():
     return get_vis_params()
 
 
-def show_map(cache_image, index_name, vis_param):
-    image = cache_image
-    layer_name = image.get("system:index").getInfo()
-
+def show_map(cache_image, layer_name, index_name, vis_param):
     Map = geemap.Map(
         layer_ctrl=True, basemap="Esri.WorldGrayCanvas", control_scale=True
     )
     minimap = plugins.MiniMap()
     Map.add_child(minimap)
-    Map.addLayer(image.select(index_name), vis_param, f"{index_name} - {layer_name}")
-    Map.add_colorbar(vis_param, label=f"{index_name} Index")
+    Map.addLayer(cache_image.select(index_name), vis_param, f"{index_name} - {layer_name}")
+    Map.add_colorbar(vis_param, label=f"{index_name} colorbar")
 
     with st.spinner("Wait for the map ..."):
         time.sleep(1)
@@ -31,7 +28,7 @@ def show_map(cache_image, index_name, vis_param):
     Map.to_streamlit(height=800)
 
 
-def disaster_map(cache_image, index_name, city, vis_param, zoom):
+def disaster_map(cache_image, layer_name, index_name, city, vis_param, zoom):
     Map = geemap.Map(basemap="Esri.WorldGrayCanvas", control_scale=True)
     minimap = plugins.MiniMap()
     Map.add_child(minimap)
@@ -59,14 +56,11 @@ def disaster_map(cache_image, index_name, city, vis_param, zoom):
 
     Map.addLayer(gd.odra.style(**river_style), {}, "Odra")
 
-    image = cache_image
-    date_acquired = image.get("DATE_ACQUIRED").getInfo()
-
-    Map.addLayer(image, vis_param, f"{index_name} - {city} - {date_acquired}")
+    Map.addLayer(cache_image, vis_param, f"{index_name} - {city} - {layer_name}")
     Map.addLayer(gd.city_boundaries[city].style(**boundries_style), {}, city)
     Map.addLayer(gd.pois[city].style(**points_style), {}, f"POIs - {city}", False)
 
-    Map.add_colorbar(vis_param, label=f"{index_name} Index")
+    Map.add_colorbar(vis_param, label=f"{index_name} colorbar")
 
     with st.spinner("Wait for the map ..."):
         time.sleep(1)
