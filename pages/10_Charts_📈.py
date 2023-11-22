@@ -58,9 +58,6 @@ buttons_name = [
 months = ["April", "May", "June", "July", "August", "September", "October"]
 years = ["2018", "2019", "2020", "2021", "2022", "2023"]
 
-if not "index" in st.session_state:
-    st.session_state["index"] = "NDWI"
-
 # Create a layout with 9 columns
 columns = st.columns(9)
 
@@ -69,19 +66,27 @@ hover_template = "Value: %{y:.2f}<extra></extra>"
 with st.container():
     for i, index_name in enumerate(index_names):
         if columns[i].button(buttons_name[i], help=f"{index_name} charts"):
-            st.session_state["index"] = index_name
+            index = index_name
+            if index in ['CDOM', 'DOC']:
+                y_name = "mg/l"
+            elif index == 'Cyanobacteria':
+                y_name = "10^3 cell/ml"
+            elif index == 'Turbidity':
+                y_name = "NTU"
+            else:
+                y_name = "Value"
             with st.container():
                 tab1, tab2, tab3, tab4 = st.tabs(
                     ["📆 Annual plots", "📆 Monthly plots", "📆 Period plot", "☣️ Disaster plot"]
                 )
                 with tab1:
-                    st.cache_data.clear()
-                    st.subheader(f"{st.session_state.index} annual charts")
+                    st.subheader(f"{index} annual charts")
+                
                     rows = st.columns(3)
                     for i, year in enumerate(years):
                         with rows[i % 3]:
                             yearly_data = get_yearly_stats_cache()[
-                                st.session_state.index
+                                index
                             ][year]
                             fig = go.Figure()
                             fig.add_trace(
@@ -100,19 +105,18 @@ with st.container():
                             )
                             fig.update_layout(
                                 title=f"{year}",
-                                yaxis_title="Value",
+                                yaxis_title=y_name,
                                 height=450,
                                 width=510,
                             )
                             st.plotly_chart(fig)
                 with tab2:
-                    st.cache_data.clear()
-                    st.subheader(f"{st.session_state.index} monthly charts")
+                    st.subheader(f"{index} monthly charts")
                     rows = st.columns(3)
                     for i, month in enumerate(months):
                         with rows[i % 3]:
                             monthly_data = get_monthly_stats_cache()[
-                                st.session_state.index
+                                index
                             ][month]
                             fig = go.Figure()
                             fig.add_trace(
@@ -131,14 +135,13 @@ with st.container():
                             )
                             fig.update_layout(
                                 title=f"{month}",
-                                yaxis_title="Value",
+                                yaxis_title=y_name,
                                 height=450,
                                 width=510,
                             )
                             st.plotly_chart(fig)
                 with tab3:
-                    st.cache_data.clear()
-                    periods_data = get_period_stats_cache()[st.session_state.index]
+                    periods_data = get_period_stats_cache()[index]
                     fig = go.Figure()
                     # Plot mean_df_am
                     trace1 = go.Scatter(
@@ -180,10 +183,10 @@ with st.container():
                     fig.add_trace(trace3)
 
                     fig.update_layout(
-                        title=f"{st.session_state.index} - mean values for 3 periods",
-                        title_font=dict(family="Tahoma", size=20),
+                        title=f"{index} - mean values for 3 periods",
+                        title_font=dict(family="Tahoma", size=21),
                         showlegend=True,
-                        yaxis_title="Value",
+                        yaxis_title=y_name,
                         height=600,
                         width=800,
                     )
@@ -205,8 +208,7 @@ with st.container():
                             st.write("September-October")
                             st.write(periods_data["autumn"])
                 with tab4:
-                    st.cache_data.clear()
-                    disaster_data = get_disaster_stats_cache()[st.session_state.index]
+                    disaster_data = get_disaster_stats_cache()[index]
                     fig = go.Figure()
                     trace = go.Scatter(
                         x=disaster_data["Month"],
@@ -221,9 +223,9 @@ with st.container():
                     fig.add_trace(trace)
 
                     fig.update_layout(
-                        yaxis_title="Value",
-                        title=f"{st.session_state.index} - median value - ecological disaster on the Oder 2022",
-                        title_font=dict(family="Tahoma", size=20),
+                        yaxis_title=y_name,
+                        title=f"{index} - median value - ecological disaster on the Oder 2022",
+                        title_font=dict(family="Tahoma", size=21),
                         height=600,
                         width=800,
                     )
