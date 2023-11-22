@@ -54,19 +54,30 @@ with tab1:
             else:
                 st.session_state["layer"] = layers[layers.index(st.session_state.layer) + 1]
 
-    st.session_state["layer"] = widget.select_slider(
-        label="Choose imagery date",
-        options=layers,
-        value=st.session_state.layer,
-    )
+    try:
+        st.session_state["layer"] = widget.select_slider(
+            label="Choose imagery date",
+            options=layers,
+            value=st.session_state.layer,
+        )
+    except:
+        st.session_state["layer"] = layers[-1]
 
     with st.spinner("Wait for the map ..."):
-        show_map(
-            all_layers[st.session_state.layer],
-            st.session_state.layer,
-            index_name,
-            colormap,
-        )
+        try:
+            show_map(
+                all_layers[st.session_state.layer],
+                st.session_state.layer,
+                index_name,
+                colormap
+            )
+        except: 
+            show_map(
+                all_layers[layers[-1]],
+                layers[-1],
+                index_name,
+                colormap
+            )
 
 with tab2:
     col1, col2 = st.columns((3, 1))
