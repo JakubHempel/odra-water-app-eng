@@ -84,7 +84,7 @@ with tab2:
     col1, col2 = st.columns((3, 1))
     with st.container():
         with col1:
-            st.subheader(f"{index_name} line plot")
+            st.subheader(f"{index_name} values across time")
             st.line_chart(get_stats_cache()[index_name])
         with col2:
             st.subheader("Data [mg/l]")
