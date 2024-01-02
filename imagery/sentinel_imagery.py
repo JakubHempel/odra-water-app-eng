@@ -57,7 +57,7 @@ def get_sentinel_images(start_year, end_year, months):
     images_all = []
 
     # Loop through each year and month
-    for year in range(start_year, end_year + 1):
+    for year in range(start_year, end_year):
         for month in months:
             start_date = ee.Date.fromYMD(year, month, 1)
             end_date = start_date.advance(1, "month")
