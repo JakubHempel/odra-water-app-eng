@@ -13,7 +13,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.header("LOSA - Laboratory of spatial analysis")
+st.subheader("LOSA - Laboratory of spatial analysis")
 
 # Customize page title
 st.title("Welcome in OdrApp! 💦")
