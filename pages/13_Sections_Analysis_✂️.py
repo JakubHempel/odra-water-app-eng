@@ -47,12 +47,7 @@ with col2:
             sections_map(warta_collection, kanal_gliwicki_collection, range(2, 6, 3))
 
 with col3:
-    urllib.request.urlretrieve(
-        "https://imgur.com/a/yz2bCkq",
-        "legend.jpg",
-    )
-    image = Image.open("legend.jpg")
-    st.image(image)
+    st.image("https://imgur.com/SgKTjyF.jpg")
 
 chart1, chart2 = st.columns(2)
 
