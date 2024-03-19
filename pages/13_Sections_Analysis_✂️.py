@@ -48,10 +48,10 @@ with col2:
 
 with col3:
     urllib.request.urlretrieve(
-        "https://i.imgur.com/xHV5fgI.jpg",
-        "xHV5fgI.jpg",
+        "https://imgur.com/a/yz2bCkq",
+        "legend.jpg",
     )
-    image = Image.open("xHV5fgI.jpg")
+    image = Image.open("legend.jpg")
     st.image(image)
 
 chart1, chart2 = st.columns(2)
