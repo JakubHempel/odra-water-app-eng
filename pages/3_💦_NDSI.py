@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(layout="wide", page_title="💦 NDWI | OdrApp 💦")
+st.set_page_config(layout="wide", page_title="💦 NDSI | OdrApp 💦")
 
 from maps.show_map import show_map
 from maps.visualizationparams import get_vis_params
