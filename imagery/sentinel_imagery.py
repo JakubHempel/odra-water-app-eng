@@ -57,7 +57,7 @@ def get_sentinel_images(start_year, end_year, months):
     images_all = []
 
     # Loop through each year and month
-    for year in range(start_year, end_year+1):
+    for year in range(start_year, end_year):
         for month in months:
             start_date = ee.Date.fromYMD(year, month, 1)
             end_date = start_date.advance(1, "month")
@@ -230,7 +230,7 @@ def get_all_layers():
     start_date = datetime(2018, 4, 1)
 
     # End date
-    end_date = datetime(current_date.year+1, current_date.month, 1)
+    end_date = datetime(current_date.year, current_date.month, 1)
     
     # Generate dates and filter months from April to October
     while start_date < end_date:
