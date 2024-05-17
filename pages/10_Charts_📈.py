@@ -56,7 +56,7 @@ buttons_name = [
     "🦠 Turbidity"
 ]
 months = ["April", "May", "June", "July", "August", "September", "October"]
-years = ["2018", "2019", "2020", "2021", "2022", "2023"]
+years = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"]
 
 # Create a layout with 9 columns
 columns = st.columns(9)
@@ -82,9 +82,9 @@ with st.container():
                 with tab1:
                     st.subheader(f"{index} annual charts")
                 
-                    rows = st.columns(3)
+                    rows = st.columns(4)
                     for i, year in enumerate(years):
-                        with rows[i % 3]:
+                        with rows[i % 4]:
                             yearly_data = get_yearly_stats_cache()[
                                 index
                             ][year]
