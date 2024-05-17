@@ -65,7 +65,7 @@ def get_sentinel_images(start_year, end_year, months):
             sentinel_image = (
                 ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
                 .filterDate(start_date, end_date)
-                .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 50))
+                .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 90))
                 .median()
                 .divide(10000)
                 .clipToCollection(gd.odra)
@@ -193,7 +193,7 @@ def get_disaster_images():
 
 # Define the year range (from 2018 to present)
 start_year = 2018
-end_year = datetime.now().year
+end_year = datetime.now().year+1
 
 # Define the months from April to October
 months = list(range(4, 11))
@@ -202,7 +202,7 @@ months = list(range(4, 11))
 sentinel_images = get_sentinel_images(start_year, end_year, months)
 
 # Convert the landsat_images list to an ImageCollection
-sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images)
+sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images[:-5]) # delete images with no data from October to ...
 
 # Calculate indices for each image
 water_collection = sentinel2_collection.map(water_indexes)
@@ -230,7 +230,7 @@ def get_all_layers():
     start_date = datetime(2018, 4, 1)
 
     # End date
-    end_date = datetime(current_date.year, current_date.month, 1)
+    end_date = datetime(current_date.year, current_date.month+1, 1)
     
     # Generate dates and filter months from April to October
     while start_date < end_date:
