@@ -5,7 +5,6 @@ import gee_data as gd
 from maps.visualizationparams import get_vis_params
 import time
 from folium import plugins
-from io import StringIO
 
 
 @st.cache_data
