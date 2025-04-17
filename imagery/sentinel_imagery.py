@@ -202,7 +202,7 @@ months = list(range(4, 11))
 sentinel_images = get_sentinel_images(start_year, end_year, months)
 
 # Convert the landsat_images list to an ImageCollection
-sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images[:-8]) # delete images with no data from October to ...
+sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images[:-6]) # delete images with no data from October to ...
 
 # Calculate indices for each image
 water_collection = sentinel2_collection.map(water_indexes)
