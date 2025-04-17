@@ -191,18 +191,20 @@ def get_disaster_images():
     }
 
 
-# Define the year range (from 2018 to present)
+# Explicitly set the desired years and months
 start_year = 2018
-end_year = datetime.now().year+1
+end_year = 2025  # 2025 inclusive
 
-# Define the months from April to October
-months = list(range(4, 11))
+# Create images from April to October for 2018-2024
+months_4_to_10 = list(range(4, 11))
+sentinel_images = get_sentinel_images(start_year, end_year, months_4_to_10)
 
-# Call the function to create landsat images for the years 2018 to 2022 (April to October) and 2023 (April to present month)
-sentinel_images = get_sentinel_images(start_year, end_year, months)
+# Add additional images for Jan-Mar 2025
+months_1_to_3 = list(range(1, 4))
+sentinel_images += get_sentinel_images(2025, 2026, months_1_to_3)
 
-# Convert the landsat_images list to an ImageCollection
-sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images[:-7]) # delete images with no data from October to ...
+# Convert the images list to an ImageCollection
+sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images)
 
 # Calculate indices for each image
 water_collection = sentinel2_collection.map(water_indexes)
