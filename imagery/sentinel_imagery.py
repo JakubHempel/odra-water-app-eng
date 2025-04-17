@@ -223,22 +223,22 @@ def get_all_layers():
         "Turbidity",
     ]
 
-    current_date = datetime.now()
     L_date = []
     
-    # Start date
+    # Start from April 2018 and go to March 2025
     start_date = datetime(2018, 4, 1)
+    end_date = datetime(2025, 3, 31)
 
-    # End date
-    end_date = datetime(current_date.year, current_date.month+1, 1)
-    
-    # Generate dates and filter months from April to October
-    while start_date < end_date:
-        if start_date.month >= 4 and start_date.month <= 10:
-            L_date.append(start_date.strftime('%Y-%m'))
-        new_month = start_date.month + 1
-        new_year = start_date.year + 1 if new_month > 12 else start_date.year
-        start_date = start_date.replace(year=new_year, month=new_month if new_month <= 12 else 1)
+    # Generate dates from April 2018 to March 2025
+    current_date = start_date
+    while current_date <= end_date:
+        L_date.append(current_date.strftime('%Y-%m'))
+        next_month = current_date.month + 1
+        next_year = current_date.year
+        if next_month > 12:
+            next_month = 1
+            next_year += 1
+        current_date = current_date.replace(year=next_year, month=next_month)
 
     for index_name in index_names:
         data[index_name] = {}
@@ -248,8 +248,13 @@ def get_all_layers():
                 ee.Filter.eq("DATE_ACQUIRED", date)
             )
 
-            first_image = filtered_collection.first().select(index_name)
-            data[index_name][date] = first_image
+            # Check if filtered_collection is empty
+            image = ee.Algorithms.If(
+                filtered_collection.size().gt(0),
+                filtered_collection.first().select(index_name),
+                None
+            )
+            data[index_name][date] = image
 
     return data
 
