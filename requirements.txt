@@ -1,7 +1,7 @@
 ee
-geemap==0.17.2
+geemap
 pandas
-streamlit
+streamlit==1.30
 plotly
-folium==0.14.0
+folium
 earthengine-api
