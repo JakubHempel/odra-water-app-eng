@@ -1,4 +1,4 @@
-ee==0.1.385
+ee>0.1.340
 geemap
 pandas
 streamlit==1.30
