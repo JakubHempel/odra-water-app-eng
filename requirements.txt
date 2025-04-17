@@ -1,7 +1,7 @@
-ee>1.0.0
+ee
 geemap
 pandas
 streamlit==1.30
 plotly
 folium
-earthengine-api
+earthengine-api>1.0.0
