@@ -60,8 +60,6 @@ def get_sentinel_images(start_year, end_year, months):
     for year in range(start_year, end_year):
         for month in months:
             start_date = f"{year}-{month}-01"
-
-            if month != 2
             end_date = f"{year}-{month}-30"
 
             sentinel_image = (
