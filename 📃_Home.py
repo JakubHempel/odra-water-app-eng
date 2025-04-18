@@ -2,6 +2,12 @@ import streamlit as st
 
 st.set_page_config(page_title="📃 Home | OdrApp 💦")
 
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
+
 st.markdown(
     """
 <style>
