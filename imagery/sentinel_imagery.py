@@ -59,8 +59,8 @@ def get_sentinel_images(start_year, end_year, months):
     # Loop through each year and month
     for year in range(start_year, end_year):
         for month in months:
-            start_date = ee.Date.fromYMD(year, month, 1)
-            end_date = start_date.advance(1, "month")
+            start_date = f"{year}-{month}-01"
+            end_date = f"{year}-{month}-30"
 
             sentinel_image = (
                 ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
@@ -68,7 +68,7 @@ def get_sentinel_images(start_year, end_year, months):
                 .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 90))
                 .median()
                 .divide(10000)
-                .clipToCollection(gd.odra)
+                .clipToCollection(odra)
             )
 
             # sentinel_image = clouds_remove(sentinel_image, replacement_image)
@@ -84,11 +84,11 @@ def get_sentinel_images(start_year, end_year, months):
             sentinel_image = sentinel_image.set("DATE_ACQUIRED", date_acquired)
             sentinel_image = sentinel_image.set("system:index", system_index)
 
-            # Append the landsat image to the list
-            images_all.append(sentinel_image)
+            if start_date != "2025-05-01":
+                # Append the landsat image to the list
+                images_all.append(sentinel_image)
 
     return images_all
-
 
 def get_disaster_images():
     # Function to get all landsat images for City AOI near date to ecological disaster
@@ -199,9 +199,8 @@ end_year = 2025  # 2025 inclusive
 months_4_to_10 = list(range(4, 11))
 sentinel_images = get_sentinel_images(start_year, end_year, months_4_to_10)
 
-# Add additional images for Jan-Mar 2025
-months_1_to_3 = list(range(1, 4))
-sentinel_images += get_sentinel_images(2025, 2026, months_1_to_3)
+months_1_to_4 = list(range(1, 5))
+sentinel_images += get_sentinel_images(2025, 2026, months_1_to_4)
 
 # Convert the images list to an ImageCollection
 sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images)
@@ -229,7 +228,7 @@ def get_all_layers():
     
     # Start from April 2018 and go to March 2025
     start_date = datetime(2018, 4, 1)
-    end_date = datetime(2025, 3, 31)
+    end_date = datetime(2025, 4, 30)
 
     # Generate dates from April 2018 to March 2025
     current_date = start_date
