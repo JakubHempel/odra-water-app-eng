@@ -68,7 +68,7 @@ def get_sentinel_images(start_year, end_year, months):
                 .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 90))
                 .median()
                 .divide(10000)
-                .clipToCollection(odra)
+                .clipToCollection(gd.odra)
             )
 
             # sentinel_image = clouds_remove(sentinel_image, replacement_image)
