@@ -60,6 +60,8 @@ def get_sentinel_images(start_year, end_year, months):
     for year in range(start_year, end_year):
         for month in months:
             start_date = f"{year}-{month}-01"
+
+            if month != 2
             end_date = f"{year}-{month}-30"
 
             sentinel_image = (
@@ -199,8 +201,8 @@ end_year = 2025  # 2025 inclusive
 months_4_to_10 = list(range(4, 11))
 sentinel_images = get_sentinel_images(start_year, end_year, months_4_to_10)
 
-months_1_to_4 = list(range(1, 5))
-sentinel_images += get_sentinel_images(2025, 2026, months_1_to_4)
+months_4_to_4 = list(range(4, 5))
+sentinel_images += get_sentinel_images(2025, 2026, months_4_to_4)
 
 # Convert the images list to an ImageCollection
 sentinel2_collection = ee.ImageCollection.fromImages(sentinel_images)
