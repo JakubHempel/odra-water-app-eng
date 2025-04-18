@@ -4,4 +4,4 @@ pandas
 streamlit==1.30
 plotly
 folium
-earthengine-api==0.1.385
+earthengine-api>=0.1.358
