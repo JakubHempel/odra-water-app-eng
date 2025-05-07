@@ -1,6 +1,6 @@
 ee
 pandas
-streamlit==1.30
+streamlit==1.44.1
 plotly
 earthengine-api>=0.1.358
 geemap>=0.28.2
